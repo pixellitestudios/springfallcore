@@ -18,11 +18,11 @@ public class StaffChatCommand extends Command {
   @Override
   public void setup(@NotNull TerminableConsumer consumer) {
     Commands.create()
-            .assertPermission("pixellite.alert")
+            .assertPermission("pixellite.staff")
             .assertPlayer()
             .assertUsage("<message>")
             .handler(this::run)
-            .registerAndBind(consumer, "alert");
+            .registerAndBind(consumer, "staffchat", "sc");
   }
 
   @Override
