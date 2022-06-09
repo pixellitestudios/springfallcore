@@ -55,6 +55,7 @@ public class ConfigKeys {
   public static List<ConfigKey<?>> getAllKeys() {
     return ImmutableList.<ConfigKey<?>>builder()
             .add(SERVER_ID,
+                    SERVER_DISPLAY_NAME,
                     STAFF_CHAT_ENABLED,
                     SELECTOR_TITLE,
                     SELECTOR_ROWS,
