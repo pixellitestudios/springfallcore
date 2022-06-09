@@ -12,6 +12,9 @@ public class ConfigKeys {
   public static final ConfigKey<String> SERVER_ID = node ->
           node.node("server-id").getString();
 
+  public static final ConfigKey<String> SERVER_DISPLAY_NAME = node ->
+          node.node("server-display-name").getString();
+
   public static final ConfigKey<Boolean> STAFF_CHAT_ENABLED = node ->
           node.node("staff-chat-enabled").getBoolean();
 

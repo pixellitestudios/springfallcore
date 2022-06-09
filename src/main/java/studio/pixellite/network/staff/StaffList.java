@@ -1,5 +1,7 @@
 package studio.pixellite.network.staff;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +21,6 @@ public class StaffList {
    * @return a copy of the initial members set to be interacted with
    */
   public Set<StaffMember> getMembers() {
-    return new HashSet<>(members);
+    return ImmutableSet.copyOf(members);
   }
 }

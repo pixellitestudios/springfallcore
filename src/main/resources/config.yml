@@ -6,6 +6,9 @@
 # The id of the server. This ID will be shared with other plugins.
 server-id: 'hub'
 
+# The server's display name. This will be used in commands such as /staff
+server-display-name: 'Hub'
+
 # If staff chat messages are enabled. When false players will not be able to send
 # staff chat messages but will still receive them.
 staff-chat-enabled: true

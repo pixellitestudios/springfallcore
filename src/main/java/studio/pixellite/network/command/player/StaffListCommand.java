@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import studio.pixellite.network.NetworkPlugin;
 import studio.pixellite.network.command.Command;
+import studio.pixellite.network.config.key.ConfigKeys;
 import studio.pixellite.network.staff.StaffList;
 import studio.pixellite.network.staff.StaffMember;
 
@@ -40,18 +41,31 @@ public class StaffListCommand extends Command {
       Set<StaffMember> members =
               server.getMetadata("stafflist", StaffList.class).getMembers();
 
-      if(!sender.hasPermission("pixellite.staff")) {
-        // sender does not have staff, filter out hidden members
-        members.removeIf(StaffMember::isHidden);
-      }
-
       if(members.isEmpty()) {
         return; // skip!
       }
 
-      Players.msg(sender, " &3✦ &b" + id);
+      boolean allHidden = members.stream().allMatch(StaffMember::isHidden);
+      boolean isStaff = sender.hasPermission("pixellite.staff");
+
+      if(!isStaff && allHidden) {
+        return; // skip!
+      }
+
+      Players.msg(sender, " &3&l(*) &b" + getPlugin()
+              .getConfiguration()
+              .get(ConfigKeys.SERVER_DISPLAY_NAME));
+
       members.forEach(member -> {
-        Players.msg(sender, "   &3- &f" + member.getName() + " &7(" + member.getPrimaryGroup() + ")"); // ignore column limit
+        if(member.isHidden()) {
+          if(isStaff) {
+            Players.msg(sender, "   &o&b&l- &f" + member.getName() +
+                    " &7(" + member.getPrimaryGroup() + ")");
+          }
+        } else {
+          Players.msg(sender, "   &b&l- &f" + member.getName() +
+                  " &7(" + member.getPrimaryGroup() + ")");
+        }
       });
     });
 
