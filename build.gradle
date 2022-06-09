@@ -1,0 +1,40 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'java'
+}
+
+group 'studio.pixellite'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://repo.lucko.me/' }
+    maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+}
+
+processResources {
+    duplicatesStrategy = 'include'
+
+    from(sourceSets.main.resources.srcDirs) {
+        expand 'pluginversion': version
+    }
+}
+
+shadowJar {
+    relocate 'org.spongepowered.configurate', 'studio.pixellite.network.configurate'
+}
+
+jar {
+    archiveBaseName = 'PixelliteNetwork'
+}
+
+dependencies {
+    implementation 'org.spongepowered:configurate-yaml:4.0.0'
+
+    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+    compileOnly 'me.lucko:helper:5.6.10'
+    compileOnly 'me.lucko:helper-redis:1.2.1'
+    compileOnly 'me.clip:placeholderapi:2.11.1'
+    compileOnly 'net.luckperms:api:5.4'
+}

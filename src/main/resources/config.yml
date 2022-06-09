@@ -1,0 +1,73 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# PixelliteNetwork                                                      #
+# Configuration                                                         #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# The id of the server. This ID will be shared with other plugins.
+server-id: 'hub'
+
+# If staff chat messages are enabled. When false players will not be able to send
+# staff chat messages but will still receive them.
+staff-chat-enabled: true
+
+# Configuration for the server selector GUI that can be
+# accessed via the /server command.
+server-selector:
+  # The title of the GUI.
+  title: 'Server Selector'
+
+  # How many rows should this GUI have?
+  rows: 3
+
+  # The glass pane scheme for this GUI.
+  # See below comments for documentation.
+  pane-scheme:
+    # Should the GUI have a pane scheme at all?
+    enabled: true
+
+    # The layout of the scheme. 1s represent where a glass pane
+    # goes in relation to the slot in the GUI, 0 represents an
+    # empty slot (leave empty slots for selector items.)
+    layout:
+      - '111111111'
+      - '110111011'
+      - '111111111'
+
+    # The glass pane scheme itself, what glass id for each slot
+    # should we use? Entering more than 9 numbers per row or more rows
+    # than on the layout will result in error.
+    scheme:
+      - '15 15 15 15 15 15 15 15 15'
+      - '15 15 15 15 15 15 15 15 15'
+      - '15 15 15 15 15 15 15 15 15'
+
+  # The various different selector items in the GUI.
+  items:
+
+    # Example item:
+    survival:
+      # What server does this selector item lead to?
+      server: 'survival'
+      # What slot is the item on in the GUI?
+      slot: 11
+      # What is the name of the item?
+      name: '&#00b389Survival'
+      # What is the item's material?
+      material: 'NETHERITE_PICKAXE'
+      # Item lore (supports RGB color codes)
+      lore:
+        - '&7Experience the vast wilderness that is'
+        - '&7survival Minecraft! &oBut with a twist...'
+        - ' '
+        - '&eClick here to join!'
+
+    events:
+      server: 'events'
+      slot: 15
+      name: '&#12acffEvents'
+      material: 'SLIME_BALL'
+      lore:
+        - '&7Partake in fun community events such as'
+        - '&7parkour, purges, spleef, and much more!'
+        - ' '
+        - '&eClick here to join!'
