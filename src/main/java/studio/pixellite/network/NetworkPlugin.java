@@ -17,7 +17,8 @@ import studio.pixellite.network.group.impl.LPPrimaryGroupTracker;
 import studio.pixellite.network.group.impl.SimplePrimaryGroupTracker;
 import studio.pixellite.network.placeholder.PixelliteExpansion;
 import studio.pixellite.network.redirect.PlayerRedirector;
-import studio.pixellite.network.staff.StaffMessenger;
+import studio.pixellite.network.staff.StaffListMetadataProvider;
+import studio.pixellite.network.staff.messenger.StaffMessenger;
 import studio.pixellite.network.util.Logging;
 
 import java.util.HashSet;
@@ -54,6 +55,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
 
     network = Network.create(messenger, instanceData);
     network.bindWith(this);
+    network.registerMetadataProvider(new StaffListMetadataProvider(this));
 
     Logging.info("Network successfully hooked in and set up!");
 

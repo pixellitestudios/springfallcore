@@ -6,7 +6,8 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 
 /**
- * Class containing all the plugin's locale.
+ * Class for interacting with Adventure locale. Legacy components may
+ * be used under certain circumstances for more efficiency.
  */
 public final class Locale {
   @FunctionalInterface

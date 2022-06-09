@@ -1,4 +1,4 @@
-package studio.pixellite.network.staff;
+package studio.pixellite.network.staff.messenger;
 
 import me.lucko.helper.messaging.Channel;
 import me.lucko.helper.messaging.ChannelAgent;
