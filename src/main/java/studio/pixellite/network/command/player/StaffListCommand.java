@@ -58,8 +58,8 @@ public class StaffListCommand extends Command {
 
       members.forEach(member -> {
         if(member.isHidden() && isStaff) {
-          Players.msg(sender, "   &o&b&l- &f" + member.getName() +
-                  " &7(" + member.getPrimaryGroup() + ")");
+          Players.msg(sender, "   &b&l- &f&o" + member.getName() +
+                  " &7&o(" + member.getPrimaryGroup() + ")");
         } else {
           Players.msg(sender, "   &b&l- &f" + member.getName() +
                   " &7(" + member.getPrimaryGroup() + ")");
