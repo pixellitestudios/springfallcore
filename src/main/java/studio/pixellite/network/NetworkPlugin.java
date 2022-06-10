@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import studio.pixellite.network.bootstrap.NetworkPluginBootstrap;
 import studio.pixellite.network.command.player.ServersCommand;
 import studio.pixellite.network.command.player.StaffListCommand;
+import studio.pixellite.network.command.privatemessage.MessageCommand;
+import studio.pixellite.network.command.privatemessage.ReplyCommand;
+import studio.pixellite.network.command.privatemessage.ToggleSocialSpyCommand;
 import studio.pixellite.network.command.staff.AlertCommand;
 import studio.pixellite.network.command.staff.StaffChatCommand;
 import studio.pixellite.network.config.key.ConfigKeys;
@@ -18,6 +21,7 @@ import studio.pixellite.network.group.PrimaryGroupTracker;
 import studio.pixellite.network.group.impl.LPPrimaryGroupTracker;
 import studio.pixellite.network.group.impl.SimplePrimaryGroupTracker;
 import studio.pixellite.network.placeholder.PixelliteExpansion;
+import studio.pixellite.network.privatemessage.PrivateMessageService;
 import studio.pixellite.network.redirect.PlayerRedirector;
 import studio.pixellite.network.staff.StaffListMetadataProvider;
 import studio.pixellite.network.staff.messenger.StaffMessenger;
@@ -28,6 +32,7 @@ import java.util.Set;
 
 public class NetworkPlugin extends NetworkPluginBootstrap {
   private PlayerRedirector playerRedirector;
+  private PrivateMessageService privateMessageService;
   private PrimaryGroupTracker primaryGroupTracker;
   private StaffMessenger staffMessenger;
   private Network network;
@@ -63,6 +68,9 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
 
     // load the player redirector
 
+    // load private message server
+    privateMessageService = new PrivateMessageService(this);
+
     // bind commands
     bindCommands();
 
@@ -87,6 +95,9 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     bindModule(new StaffListCommand(this));
     bindModule(new AlertCommand(this));
     bindModule(new StaffChatCommand(this));
+    bindModule(new MessageCommand(this));
+    bindModule(new ReplyCommand(this));
+    bindModule(new ToggleSocialSpyCommand(this));
 
     // helper modules
     bindModule(new NetworkStatusModule(network));
@@ -104,6 +115,10 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
 
   public PlayerRedirector getPlayerRedirector() {
     return playerRedirector;
+  }
+
+  public PrivateMessageService getPrivateMessageService() {
+    return privateMessageService;
   }
 
   public PrimaryGroupTracker getPrimaryGroupTracker() {

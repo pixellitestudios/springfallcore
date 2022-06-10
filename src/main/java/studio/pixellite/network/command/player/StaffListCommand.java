@@ -53,7 +53,7 @@ public class StaffListCommand extends Command {
         return; // skip, all staff members are hidden and the player isn't a staff member
       }
 
-      Players.msg(sender, " &3&l(*) &b" + getPlugin()
+      Players.msg(sender, " &3&l➥ &b" + getPlugin()
               .getConfiguration()
               .get(ConfigKeys.SERVER_DISPLAY_NAME));
 

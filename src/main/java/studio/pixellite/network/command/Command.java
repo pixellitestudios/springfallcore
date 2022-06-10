@@ -1,6 +1,7 @@
 package studio.pixellite.network.command;
 
 import me.lucko.helper.Commands;
+import me.lucko.helper.command.CommandInterruptException;
 import me.lucko.helper.command.context.CommandContext;
 import me.lucko.helper.terminable.TerminableConsumer;
 import me.lucko.helper.terminable.module.TerminableModule;
@@ -39,6 +40,8 @@ public abstract class Command implements TerminableModule {
    *
    * @param c the command handler
    * @param <T> the type of sender this handler is providing
+   * @throws CommandInterruptException if the command is interrupted
    */
-  public abstract <T extends CommandSender> void run(CommandContext<T> c);
+  public abstract <T extends CommandSender> void run(CommandContext<T> c)
+          throws CommandInterruptException;
 }
