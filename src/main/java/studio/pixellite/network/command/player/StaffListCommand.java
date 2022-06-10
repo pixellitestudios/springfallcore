@@ -11,6 +11,7 @@ import studio.pixellite.network.command.Command;
 import studio.pixellite.network.config.key.ConfigKeys;
 import studio.pixellite.network.staff.StaffList;
 import studio.pixellite.network.staff.StaffMember;
+import studio.pixellite.network.util.Strings;
 
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class StaffListCommand extends Command {
 
     // using legacy codes as I'm too lazy to implement a solution using
     // adventure
-    Players.msg(sender, "&3&m                                                       "); // ignore column limit
+    Players.msg(sender, "&3&m                                                       ");
     Players.msg(sender, " ");
     Players.msg(sender, " &3&lONLINE STAFF");
     Players.msg(sender, " ");
@@ -42,14 +43,14 @@ public class StaffListCommand extends Command {
               server.getMetadata("stafflist", StaffList.class).getMembers();
 
       if(members.isEmpty()) {
-        return; // skip!
+        return; // skip, no staff members are on this server, so we don't need to show
       }
 
       boolean allHidden = members.stream().allMatch(StaffMember::isHidden);
       boolean isStaff = sender.hasPermission("pixellite.staff");
 
       if(!isStaff && allHidden) {
-        return; // skip!
+        return; // skip, all staff members are hidden and the player isn't a staff member
       }
 
       Players.msg(sender, " &3&l(*) &b" + getPlugin()
@@ -57,17 +58,22 @@ public class StaffListCommand extends Command {
               .get(ConfigKeys.SERVER_DISPLAY_NAME));
 
       members.forEach(member -> {
-        if(member.isHidden() && isStaff) {
-          Players.msg(sender, "   &b&l- &f&o" + member.getName() +
-                  " &7&o(" + member.getPrimaryGroup() + ")");
-        } else {
-          Players.msg(sender, "   &b&l- &f" + member.getName() +
-                  " &7(" + member.getPrimaryGroup() + ")");
+        if(member.isHidden() && isStaff) { // member is hidden and player is staff
+          Players.msg(sender, Strings.concat("   &b&l-&f&o ",
+                  member.getName(),
+                  " &7&o(", member.getPrimaryGroup(),
+                  ")"));
+
+        } else { // member is not hidden and player is not staff
+          Players.msg(sender, Strings.concat("   &b&l-&f ",
+                  member.getName(),
+                  " &7(", member.getPrimaryGroup(),
+                  ")"));
         }
       });
     });
 
     Players.msg(sender, " ");
-    Players.msg(sender, "&3&m                                                       "); // ignore column limit
+    Players.msg(sender, "&3&m                                                       ");
   }
 }

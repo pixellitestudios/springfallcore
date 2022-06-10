@@ -9,6 +9,7 @@ import me.lucko.helper.network.modules.NetworkStatusModule;
 import me.lucko.helper.network.modules.NetworkSummaryModule;
 import org.jetbrains.annotations.NotNull;
 import studio.pixellite.network.bootstrap.NetworkPluginBootstrap;
+import studio.pixellite.network.command.player.ServersCommand;
 import studio.pixellite.network.command.player.StaffListCommand;
 import studio.pixellite.network.command.staff.AlertCommand;
 import studio.pixellite.network.command.staff.StaffChatCommand;
@@ -82,9 +83,10 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     Logging.info("Loading commands...");
 
     // pixellitenetwork commands
+    bindModule(new ServersCommand(this));
+    bindModule(new StaffListCommand(this));
     bindModule(new AlertCommand(this));
     bindModule(new StaffChatCommand(this));
-    bindModule(new StaffListCommand(this));
 
     // helper modules
     bindModule(new NetworkStatusModule(network));

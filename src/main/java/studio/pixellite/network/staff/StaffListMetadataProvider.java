@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A network metadata provider for providing staff list metadata to each server.
+ */
 public class StaffListMetadataProvider implements ServerMetadataProvider {
   private final NetworkPlugin plugin;
 
@@ -22,14 +25,15 @@ public class StaffListMetadataProvider implements ServerMetadataProvider {
     Set<StaffMember> members = new HashSet<>();
 
     for(Player player : Bukkit.getOnlinePlayers()) {
-      if(player.hasPermission("pixellite.staff")) {
-        members.add(StaffMember.builder()
-                .setName(player.getName())
-                .setPrimaryGroup(plugin.getPrimaryGroupTracker()
-                        .getPrimaryGroup(player))
-                .setHidden(player.hasPermission("pixellite.hidden"))
-                .build());
+      if(!player.hasPermission("pixellite.staff")) {
+        continue;
       }
+
+      String name = player.getName();
+      String primaryGroup = plugin.getPrimaryGroupTracker().getPrimaryGroup(player);
+      boolean isHidden = player.hasPermission("pixellite.hidden");
+
+      members.add(new StaffMember(name, primaryGroup, isHidden));
     }
 
     return Collections.singleton(ServerMetadata.of("stafflist",

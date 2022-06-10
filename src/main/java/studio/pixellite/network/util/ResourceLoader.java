@@ -6,6 +6,9 @@ import studio.pixellite.network.NetworkPlugin;
 import java.io.File;
 import java.util.List;
 
+/**
+ * A utility class for loading resources onto actual files.
+ */
 public final class ResourceLoader {
   /**
    * Loads a resource into the plugin data folder.

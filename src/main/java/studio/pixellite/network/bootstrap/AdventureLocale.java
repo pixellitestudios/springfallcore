@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
  * Class for interacting with Adventure locale. Legacy components may
  * be used under certain circumstances for more efficiency.
  */
-public final class Locale {
+public final class AdventureLocale {
   @FunctionalInterface
   public interface NoArg {
     void send(Player player);
@@ -25,6 +25,7 @@ public final class Locale {
     void send(Player player, T arg1, S arg2, U arg3, V arg4);
   }
 
+  /** Message with RGB coloring for sending alerts accross the entire network. */
   public static final Arg<String> GLOBAL_ALERT = (player, msg) -> {
     Component component = Component.text("ALERT: ")
             .color(colorOf(0xde0000))
@@ -36,7 +37,13 @@ public final class Locale {
     player.sendMessage(component);
   };
 
-  public static TextColor colorOf(int color) {
+  /**
+   * Simple utility function for getting the color of an integer value in a more clean manner.
+   *
+   * @param color the color value to get
+   * @return the text color
+   */
+  private static TextColor colorOf(int color) {
     return TextColor.color(color);
   }
 }

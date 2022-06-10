@@ -3,8 +3,7 @@ package studio.pixellite.network.config.key;
 import org.spongepowered.configurate.ConfigurationNode;
 
 /**
- * A functional interface for accessing specific values
- * within the given configuration node.
+ * A functional interface for accessing specific values within the given configuration node.
  *
  * @param <T> the type of value that is being accessed
  */

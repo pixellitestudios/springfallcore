@@ -9,10 +9,6 @@ server-id: 'hub'
 # The server's display name. This will be used in commands such as /staff
 server-display-name: 'Hub'
 
-# If staff chat messages are enabled. When false players will not be able to send
-# staff chat messages but will still receive them.
-staff-chat-enabled: true
-
 # Configuration for the server selector GUI that can be
 # accessed via the /server command.
 server-selector:

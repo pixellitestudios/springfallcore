@@ -2,7 +2,6 @@ package studio.pixellite.network.staff;
 
 import com.google.common.collect.ImmutableSet;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**

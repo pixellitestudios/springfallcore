@@ -1,5 +1,6 @@
 package studio.pixellite.network.command;
 
+import me.lucko.helper.Commands;
 import me.lucko.helper.command.context.CommandContext;
 import me.lucko.helper.terminable.TerminableConsumer;
 import me.lucko.helper.terminable.module.TerminableModule;
@@ -8,8 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import studio.pixellite.network.NetworkPlugin;
 
 /**
- * An organized, more clean way of running executions for helper
- * generated commands.
+ * An organized, more clean way of running executions for helper generated commands.
  *
  * <p>Commands are built in {@link #setup(TerminableConsumer)} and their
  * execution method is ran via {@link #run(CommandContext)}.</p>
@@ -25,6 +25,12 @@ public abstract class Command implements TerminableModule {
     return plugin;
   }
 
+  /**
+   * Sets up this command. Typically, used with helper's {@link Commands} library to register
+   * and bind to the given consumer
+   *
+   * @param consumer the terminable consumer to bind with
+   */
   @Override
   public abstract void setup(@NotNull TerminableConsumer consumer);
 

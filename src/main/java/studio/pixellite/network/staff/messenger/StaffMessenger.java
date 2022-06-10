@@ -10,8 +10,7 @@ import studio.pixellite.network.NetworkPlugin;
 /**
  * Messenger for sending cross-network staff alerts.
  *
- * <p>Usage examples include sending staff alerts, dispatching
- * notifications to admins, etc.</p>
+ * <p>Usage examples include sending staff alerts, dispatching notifications to admins, etc.</p>
  */
 public class StaffMessenger {
   private static final class StaffMessage {
@@ -32,8 +31,8 @@ public class StaffMessenger {
   }
 
   /**
-   * Dispatches a message to all online available staff members
-   * on the network in legacy color code formatting.
+   * Dispatches a message to all online available staff members on the network in legacy color
+   * code formatting.
    *
    * @param message the message that is being sent
    * @param adminOnly if this message should only be sent to admins

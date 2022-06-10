@@ -10,6 +10,9 @@ import studio.pixellite.network.command.Command;
 import studio.pixellite.network.util.Logging;
 import studio.pixellite.network.util.Strings;
 
+/**
+ * Command for sending staff chat messages.
+ */
 public class StaffChatCommand extends Command {
   public StaffChatCommand(NetworkPlugin plugin) {
     super(plugin);
@@ -29,9 +32,13 @@ public class StaffChatCommand extends Command {
   public <T extends CommandSender> void run(CommandContext<T> c) {
     String message = Strings.joinList(c.args());
 
-    getPlugin().getStaffMessenger().dispatchMessage("&3[&f" +
-            getPlugin().getInstanceData().getId() + "&3] " +
-            c.sender().getName() + ": &b" + message, false);
+    getPlugin().getStaffMessenger().dispatchMessage(Strings.concat(
+            "&3[&f",
+            getPlugin().getInstanceData().getId(),
+            "&3] ", c.sender().getName(),
+            ": &b",
+            message),
+            false);
 
     Logging.info("[SC] " + c.sender().getName() + ": " + message);
   }

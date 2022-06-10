@@ -34,8 +34,7 @@ public class PixelliteExpansion extends PlaceholderExpansion {
   }
 
   @Override
-  public @Nullable String onPlaceholderRequest(Player player,
-                                               @NotNull String params) {
+  public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
     return super.onPlaceholderRequest(player, params);
   }
 }

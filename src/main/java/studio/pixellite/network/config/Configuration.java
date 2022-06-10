@@ -7,6 +7,7 @@ import studio.pixellite.network.bootstrap.NetworkPluginBootstrap;
 import studio.pixellite.network.config.cache.ValuesCache;
 import studio.pixellite.network.config.key.ConfigKey;
 import studio.pixellite.network.config.key.ConfigKeys;
+import studio.pixellite.network.util.Logging;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,8 +16,7 @@ import java.util.Objects;
 /**
  * The access point for the plugin's configuration file.
  *
- * <p>Values are accessed via {@link ConfigKeys} and are loaded
- * on plugin startup.</p>
+ * <p>Values are accessed via {@link ConfigKeys} and are loaded on plugin startup.</p>
  *
  * <p>Closing this object will clear all cached values.</p>
  */
@@ -29,9 +29,6 @@ public class Configuration {
 
   /** The backend configuration node being used to obtain values. */
   private final ConfigurationNode node;
-
-  /** Boolean to ensure that keys are online loaded once at startup. */
-  private boolean keysLoaded = false;
 
   public Configuration(NetworkPluginBootstrap bootstrap) {
     this.bootstrap = bootstrap;
@@ -59,29 +56,17 @@ public class Configuration {
   }
 
   private void loadKeys() {
-    if(keysLoaded) {
-      return;
-    }
-
     for(ConfigKey<?> key : ConfigKeys.getAllKeys()) {
       // load and calculate key values into
       // the cache.
       cache.add(key);
     }
-
-    // while the cache does physically prevent duplicate
-    // key entries, this is just a safe precaution to ensure
-    // that under no circumstances are key calculations made
-    // again
-    keysLoaded = true;
   }
 
   /**
-   * Generates a {@link ConfigurationNode} for the plugin's
-   * config.yml file.
+   * Generates a {@link ConfigurationNode} for the plugin's config.yml file.
    *
-   * <p>Should only be used when reloading or on the plugin's
-   * startup.</p>
+   * <p>Should only be used when reloading or on the plugin's startup.</p>
    *
    * @return the new configuration node
    */

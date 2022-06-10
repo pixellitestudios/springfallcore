@@ -2,13 +2,13 @@ package studio.pixellite.network.config.cache;
 
 import studio.pixellite.network.config.Configuration;
 import studio.pixellite.network.config.key.ConfigKey;
+import studio.pixellite.network.util.Logging;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * A simple cache backed by a {@link ConcurrentHashMap} for storing
- * configuration values.
+ * A simple cache backed by a {@link ConcurrentHashMap} for storing configuration values.
  */
 @SuppressWarnings("unchecked")
 public class ValuesCache {
@@ -39,8 +39,7 @@ public class ValuesCache {
   }
 
   /**
-   * Calculates the value from a config key and adds
-   * it to the cache.
+   * Calculates the value from a config key and adds it to the cache.
    *
    * @param key the key & value to add
    */
