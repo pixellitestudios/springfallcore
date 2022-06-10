@@ -58,12 +58,13 @@ public class StaffListCommand extends Command {
               .get(ConfigKeys.SERVER_DISPLAY_NAME));
 
       members.forEach(member -> {
-        if(member.isHidden() && isStaff) { // member is hidden and player is staff
-          Players.msg(sender, Strings.concat("   &b&l-&f&o ",
-                  member.getName(),
-                  " &7&o(", member.getPrimaryGroup(),
-                  ")"));
-
+        if(member.isHidden()) { // member is hidden
+          if(isStaff) { // player is staff, so send
+            Players.msg(sender, Strings.concat("   &b&l-&f&o ",
+                    member.getName(),
+                    " &7&o(", member.getPrimaryGroup(),
+                    ")"));
+          }
         } else { // member is not hidden and player is not staff
           Players.msg(sender, Strings.concat("   &b&l-&f ",
                   member.getName(),
