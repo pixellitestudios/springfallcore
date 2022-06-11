@@ -14,6 +14,8 @@ import studio.pixellite.network.command.player.StaffListCommand;
 import studio.pixellite.network.command.privatemessage.MessageCommand;
 import studio.pixellite.network.command.privatemessage.ReplyCommand;
 import studio.pixellite.network.command.privatemessage.ToggleSocialSpyCommand;
+import studio.pixellite.network.command.redirect.HubCommand;
+import studio.pixellite.network.command.redirect.RedirectCommand;
 import studio.pixellite.network.command.staff.AlertCommand;
 import studio.pixellite.network.command.staff.StaffChatCommand;
 import studio.pixellite.network.config.key.ConfigKeys;
@@ -67,6 +69,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     Logging.info("Network successfully hooked in and set up!");
 
     // load the player redirector
+    playerRedirector = new PlayerRedirector(this);
 
     // load private message server
     privateMessageService = new PrivateMessageService(this);
@@ -98,6 +101,12 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     bindModule(new MessageCommand(this));
     bindModule(new ReplyCommand(this));
     bindModule(new ToggleSocialSpyCommand(this));
+    bindModule(new HubCommand(this));
+
+    // Bind redirect commands
+    for(String server : getConfiguration().get(ConfigKeys.REDIRECT_COMMANDS)) {
+      bindModule(new RedirectCommand(this, server));
+    }
 
     // helper modules
     bindModule(new NetworkStatusModule(network));

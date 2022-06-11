@@ -5,6 +5,7 @@ import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.scheme.MenuScheme;
 import me.lucko.helper.menu.scheme.StandardSchemeMappings;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -64,7 +65,10 @@ public class ServerSelectorGui extends Gui {
       meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
       itemStack.setItemMeta(meta);
 
-      setItem(info.getSlot(), Item.builder(itemStack).build());
+      setItem(info.getSlot(), Item.builder(itemStack).bind(ClickType.LEFT, () -> {
+        plugin.getPlayerRedirector().attemptRedirect(getPlayer(), info.getServerId());
+        close();
+      }).build());
     }
   }
 }

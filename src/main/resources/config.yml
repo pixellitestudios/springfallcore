@@ -9,6 +9,15 @@ server-id: 'hub'
 # The server's display name. This will be used in commands such as /staff
 server-display-name: 'Hub'
 
+# If this server is a hub server. If false, all connections will be forced
+# through the redirect system for security.
+is-hub-server: true
+
+# What backend servers should have their own redirect commands?
+redirect-command-list:
+  - 'survival'
+  - 'events'
+
 # Configuration for the server selector GUI that can be
 # accessed via the /server command.
 server-selector:

@@ -27,6 +27,15 @@ public class ConfigKeys {
           node.node("server-display-name").getString();
 
   /**
+   * If this server is a hub server. Impacts redirect behavior.
+   */
+  public static final ConfigKey<Boolean> IS_HUB_SERVER = node ->
+          node.node("is-hub-server").getBoolean();
+
+  public static final ConfigKey<List<String>> REDIRECT_COMMANDS = node ->
+          getStringList(node.node("redirect-command-list"));
+
+  /**
    * The title of the server selector GUI.
    */
   public static final ConfigKey<String> SELECTOR_TITLE = node ->
