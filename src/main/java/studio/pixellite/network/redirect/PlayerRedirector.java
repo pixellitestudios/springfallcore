@@ -49,9 +49,6 @@ public class PlayerRedirector {
       return;
     }
 
-    // add the player to the cooldown
-    cooldowns.put(player.getUniqueId(), cooldowns.getBase().copy());
-
     String serverName = server.toLowerCase();
     Players.msg(player, "&cAttempting to send you to " + server + "...");
 
