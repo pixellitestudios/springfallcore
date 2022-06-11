@@ -65,6 +65,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     network = Network.create(messenger, instanceData);
     network.bindWith(this);
     network.registerMetadataProvider(new StaffListMetadataProvider(this));
+    Services.provide(Network.class, network);
 
     Logging.info("Network successfully hooked in and set up!");
 
