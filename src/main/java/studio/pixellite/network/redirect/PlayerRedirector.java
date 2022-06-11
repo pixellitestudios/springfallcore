@@ -1,5 +1,7 @@
 package studio.pixellite.network.redirect;
 
+import me.lucko.helper.cooldown.Cooldown;
+import me.lucko.helper.cooldown.CooldownMap;
 import me.lucko.helper.network.redirect.RedirectSystem;
 import me.lucko.helper.utils.Players;
 import org.bukkit.entity.Player;
@@ -7,6 +9,8 @@ import studio.pixellite.network.NetworkPlugin;
 import studio.pixellite.network.config.key.ConfigKeys;
 
 import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A system for handling requests to redirect a player to another server. Backed
@@ -15,6 +19,10 @@ import java.util.HashMap;
 public class PlayerRedirector {
   /** The primary redirect system backing this redirector. */
   private final RedirectSystem redirectSystem;
+
+  /** A cooldown map for server redirects. To prevent players from excessively switching servers. */
+  private final CooldownMap<UUID> cooldowns =
+          CooldownMap.create(Cooldown.of(6, TimeUnit.SECONDS));
 
   public PlayerRedirector(NetworkPlugin plugin) {
     this.redirectSystem = RedirectSystem.create(plugin.getMessenger(),
@@ -35,6 +43,15 @@ public class PlayerRedirector {
    * @param server the name of the server to redirect to
    */
   public void attemptRedirect(Player player, String server) {
+    // test the player for a cooldown
+    if(!cooldowns.test(player.getUniqueId())) {
+      Players.msg(player, "&cPlease wait before switching servers again!");
+      return;
+    }
+
+    // add the player to the cooldown
+    cooldowns.put(player.getUniqueId(), cooldowns.getBase().copy());
+
     String serverName = server.toLowerCase();
     Players.msg(player, "&cAttempting to send you to " + server + "...");
 
