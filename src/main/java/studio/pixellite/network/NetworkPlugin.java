@@ -7,6 +7,7 @@ import me.lucko.helper.network.Network;
 import me.lucko.helper.network.modules.FindCommandModule;
 import me.lucko.helper.network.modules.NetworkStatusModule;
 import me.lucko.helper.network.modules.NetworkSummaryModule;
+import org.bukkit.plugin.ServicePriority;
 import org.jetbrains.annotations.NotNull;
 import studio.pixellite.network.bootstrap.NetworkPluginBootstrap;
 import studio.pixellite.network.command.player.ServersCommand;
@@ -65,7 +66,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     network = Network.create(messenger, instanceData);
     network.bindWith(this);
     network.registerMetadataProvider(new StaffListMetadataProvider(this));
-    Services.provide(Network.class, network);
+    Services.provide(Network.class, network, this, ServicePriority.Highest);
 
     Logging.info("Network successfully hooked in and set up!");
 
@@ -88,7 +89,9 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     Services.provide(NetworkApi.class, new NetworkApiProvider());
 
     // register PlaceholderAPI expansion
-    new PixelliteExpansion(this).register();
+    if(getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+      new PixelliteExpansion(this).register();
+    }
   }
 
   protected void bindCommands() {

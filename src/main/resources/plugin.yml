@@ -6,3 +6,4 @@ main: studio.pixellite.network.NetworkPlugin
 api-version: 1.13
 website: https://pixellite.studio/
 depend: [helper, helper-redis]
+softdepend: [PlaceholderAPI]

@@ -18,7 +18,7 @@ public class HubCommand extends Command {
   @Override
   public void setup(@NotNull TerminableConsumer consumer) {
     // Server is not a hub server, no need to register
-    if(!getPlugin().getConfiguration().get(ConfigKeys.IS_HUB_SERVER)) {
+    if(getPlugin().getConfiguration().get(ConfigKeys.IS_HUB_SERVER)) {
       return;
     }
 

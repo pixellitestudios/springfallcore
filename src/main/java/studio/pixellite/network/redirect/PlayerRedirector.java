@@ -20,6 +20,9 @@ public class PlayerRedirector {
   /** The primary plugin instance. */
   private final NetworkPlugin plugin;
 
+  /** The backend player redirector. */
+  private final me.lucko.helper.network.redirect.PlayerRedirector redirector;
+
   /** The primary redirect system backing this redirector. */
   private final RedirectSystem redirectSystem;
 
@@ -29,9 +32,10 @@ public class PlayerRedirector {
 
   public PlayerRedirector(NetworkPlugin plugin) {
     this.plugin = plugin;
+    this.redirector = new VelocityBackendRedirector();
     this.redirectSystem = RedirectSystem.create(plugin.getMessenger(),
             plugin.getInstanceData(),
-            new VelocityBackendRedirector());
+            this.redirector);
 
     // Disable redirect queue ensure if the server the plugin
     // is installed on is a hub server
@@ -64,9 +68,14 @@ public class PlayerRedirector {
 
     this.redirectSystem.redirectPlayer(serverName, player, new HashMap<>())
             .thenAcceptAsync(response -> {
-              // attempted server is offline?
-              if(response.getStatus().equals(RedirectSystem.ReceivedResponse.Status.NO_REPLY)) {
+              RedirectSystem.ReceivedResponse.Status status = response.getStatus();
+
+              if(status.equals(RedirectSystem.ReceivedResponse.Status.NO_REPLY)) {
+                // attempted server is offline?
                 Players.msg(player, "&cConnection to " + serverName + " timed out.");
+              } else if(status.equals(RedirectSystem.ReceivedResponse.Status.ALLOWED)) {
+                // redirect player
+                redirector.redirectPlayer(serverName, player);
               }
             });
   }
