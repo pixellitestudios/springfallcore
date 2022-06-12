@@ -17,6 +17,9 @@ import java.util.concurrent.TimeUnit;
  * by {@link RedirectSystem}.
  */
 public class PlayerRedirector {
+  /** The primary plugin instance. */
+  private final NetworkPlugin plugin;
+
   /** The primary redirect system backing this redirector. */
   private final RedirectSystem redirectSystem;
 
@@ -25,6 +28,7 @@ public class PlayerRedirector {
           CooldownMap.create(Cooldown.of(6, TimeUnit.SECONDS));
 
   public PlayerRedirector(NetworkPlugin plugin) {
+    this.plugin = plugin;
     this.redirectSystem = RedirectSystem.create(plugin.getMessenger(),
             plugin.getInstanceData(),
             new VelocityBackendRedirector());
@@ -51,6 +55,12 @@ public class PlayerRedirector {
 
     String serverName = server.toLowerCase();
     Players.msg(player, "&cAttempting to send you to " + server + "...");
+
+    // check if the server that is being requested is the same server
+    if(plugin.getInstanceData().getId().equals(serverName)) {
+      Players.msg(player, "&cYou're already connected to that server!");
+      return;
+    }
 
     this.redirectSystem.redirectPlayer(serverName, player, new HashMap<>())
             .thenAcceptAsync(response -> {
