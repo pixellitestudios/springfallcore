@@ -53,9 +53,7 @@ public class StaffListCommand extends Command {
         return; // skip, all staff members are hidden and the player isn't a staff member
       }
 
-      Players.msg(sender, " &3&l➥ &b" + getPlugin()
-              .getConfiguration()
-              .get(ConfigKeys.SERVER_DISPLAY_NAME));
+      Players.msg(sender, " &3&l➥ &b" + Strings.capitalizeFirst(id));
 
       members.forEach(member -> {
         if(member.isHidden()) { // member is hidden
@@ -72,6 +70,8 @@ public class StaffListCommand extends Command {
                   ")"));
         }
       });
+
+      Players.msg(sender, " ");
     });
 
     Players.msg(sender, " ");
