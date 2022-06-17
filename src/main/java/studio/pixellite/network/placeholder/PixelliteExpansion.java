@@ -1,6 +1,7 @@
 package studio.pixellite.network.placeholder;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import me.lucko.helper.network.Server;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,22 @@ public class PixelliteExpansion extends PlaceholderExpansion {
 
   @Override
   public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
-    return super.onPlaceholderRequest(player, params);
+    // requesting overall playercount of a server
+    if(params.startsWith("playercount_")) {
+      String serverName = params.replace("playercount_", "");
+      Server server = plugin.getNetwork().getServers().get(serverName);
+
+      if(server == null) {
+        return null;
+      }
+
+      if(!server.isOnline()) {
+        return "Offline";
+      }
+
+      return server.getOnlinePlayers().size() + "/" + server.getMaxPlayers();
+    }
+
+    return null;
   }
 }

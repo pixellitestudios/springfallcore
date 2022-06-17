@@ -52,6 +52,15 @@ public class AlertCommand extends Command {
     message.sender = c.sender().getName();
     message.serverId = getPlugin().getInstanceData().getId();
     channel.sendMessage(message);
+
+    // send dispatch notification to all other online servers
+    getPlugin().getStaffMessenger().dispatchMessage(Strings.concat(
+                    "&7[&anetwork&7] ",
+                    "Alert message dispatched by &2",
+                    message.sender,
+                    " &7from &2",
+                    message.serverId),
+            true);
   }
 
   private void handleAlert(AlertMessage message) {
@@ -61,13 +70,5 @@ public class AlertCommand extends Command {
 
     Logging.info("[Alert] (Dispatched by " + message.sender + " on " +
             message.serverId + ") " + message.message);
-
-    getPlugin().getStaffMessenger().dispatchMessage(Strings.concat(
-            "&7[&anetwork&7] ",
-            "Alert message dispatched by &2",
-            message.sender,
-            " &7from &2",
-            message.serverId),
-            true);
   }
 }
