@@ -86,7 +86,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     staffMessenger = new StaffMessenger(this);
 
     // provide API
-    Services.provide(NetworkApi.class, new NetworkApiProvider());
+    Services.provide(NetworkApi.class, new NetworkApiProvider(this));
 
     // register PlaceholderAPI expansion
     if(getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
