@@ -42,7 +42,7 @@ public class PixelliteExpansion extends PlaceholderExpansion {
       Server server = plugin.getNetwork().getServers().get(serverName);
 
       if(server == null) {
-        return null;
+        return "Offline";
       }
 
       if(!server.isOnline()) {
