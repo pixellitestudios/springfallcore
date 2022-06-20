@@ -39,7 +39,7 @@ public class StaffListCommand extends Command {
     Players.msg(sender, " ");
 
     getPlugin().getNetwork().getServers().forEach((id, server) -> {
-      if(server.isOnline()) {
+      if(!server.isOnline()) {
         return; // server isn't online, skip!
       }
 
