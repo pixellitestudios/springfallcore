@@ -39,6 +39,10 @@ public class StaffListCommand extends Command {
     Players.msg(sender, " ");
 
     getPlugin().getNetwork().getServers().forEach((id, server) -> {
+      if(server.isOnline()) {
+        return; // server isn't online, skip!
+      }
+
       Set<StaffMember> members =
               server.getMetadata("stafflist", StaffList.class).getMembers();
 
