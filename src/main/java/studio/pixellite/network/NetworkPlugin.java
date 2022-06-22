@@ -113,7 +113,6 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     }
 
     // helper modules
-    bindModule(new NetworkStatusModule(network));
     bindModule(new FindCommandModule(network));
     bindModule(new NetworkSummaryModule(network, instanceData));
   }
