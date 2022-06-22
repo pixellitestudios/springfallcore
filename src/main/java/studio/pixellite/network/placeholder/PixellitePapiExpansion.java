@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import studio.pixellite.network.NetworkPlugin;
 
-public class PixelliteExpansion extends PlaceholderExpansion {
+public class PixellitePapiExpansion extends PlaceholderExpansion {
   private final NetworkPlugin plugin;
 
-  public PixelliteExpansion(NetworkPlugin plugin) {
+  public PixellitePapiExpansion(NetworkPlugin plugin) {
     this.plugin = plugin;
   }
 

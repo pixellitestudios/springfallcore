@@ -5,7 +5,6 @@ import me.lucko.helper.messaging.InstanceData;
 import me.lucko.helper.messaging.Messenger;
 import me.lucko.helper.network.Network;
 import me.lucko.helper.network.modules.FindCommandModule;
-import me.lucko.helper.network.modules.NetworkStatusModule;
 import me.lucko.helper.network.modules.NetworkSummaryModule;
 import org.bukkit.plugin.ServicePriority;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +22,7 @@ import studio.pixellite.network.config.key.ConfigKeys;
 import studio.pixellite.network.group.PrimaryGroupTracker;
 import studio.pixellite.network.group.impl.LPPrimaryGroupTracker;
 import studio.pixellite.network.group.impl.SimplePrimaryGroupTracker;
-import studio.pixellite.network.placeholder.PixelliteExpansion;
+import studio.pixellite.network.placeholder.PixellitePapiExpansion;
 import studio.pixellite.network.privatemessage.PrivateMessageService;
 import studio.pixellite.network.redirect.PlayerRedirector;
 import studio.pixellite.network.staff.StaffListMetadataProvider;
@@ -90,7 +89,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
 
     // register PlaceholderAPI expansion
     if(getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-      new PixelliteExpansion(this).register();
+      new PixellitePapiExpansion(this).register();
     }
   }
 
