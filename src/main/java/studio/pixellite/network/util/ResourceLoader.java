@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * A utility class for loading resources onto actual files.
+ *
+ * @author Connor Ruesch
  */
 public final class ResourceLoader {
   /**
