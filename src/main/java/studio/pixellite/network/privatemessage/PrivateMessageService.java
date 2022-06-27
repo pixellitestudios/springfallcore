@@ -109,7 +109,7 @@ public class PrivateMessageService {
       @NotNull
       @Override
       public RegistrationAction onReply(@NotNull PrivateMessageService.PrivateMessageReply reply) {
-        AdventureLocale.PRIVATE_MESSAGE_TO.send(sender, to, server, message);
+        AdventureLocale.PRIVATE_MESSAGE_TO.send(sender, reply.sent, server, message);
         return RegistrationAction.STOP_LISTENING;
       }
 
