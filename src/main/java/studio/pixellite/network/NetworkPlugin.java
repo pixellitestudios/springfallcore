@@ -16,6 +16,7 @@ import studio.pixellite.network.command.privatemessage.ReplyCommand;
 import studio.pixellite.network.command.privatemessage.ToggleSocialSpyCommand;
 import studio.pixellite.network.command.redirect.HubCommand;
 import studio.pixellite.network.command.redirect.RedirectCommand;
+import studio.pixellite.network.command.redirect.SendCommand;
 import studio.pixellite.network.command.staff.AlertCommand;
 import studio.pixellite.network.command.staff.StaffChatCommand;
 import studio.pixellite.network.config.key.ConfigKeys;
@@ -105,6 +106,7 @@ public class NetworkPlugin extends NetworkPluginBootstrap {
     bindModule(new ReplyCommand(this));
     bindModule(new ToggleSocialSpyCommand(this));
     bindModule(new HubCommand(this));
+    bindModule(new SendCommand(this));
 
     // Bind redirect commands
     for(String server : getConfiguration().get(ConfigKeys.REDIRECT_COMMANDS)) {
