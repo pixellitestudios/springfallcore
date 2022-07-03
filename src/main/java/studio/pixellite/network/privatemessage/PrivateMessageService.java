@@ -149,6 +149,10 @@ public class PrivateMessageService {
         return null;
       }
 
+      if(player.hasPermission("pixellite.hidden")) {
+        return null;
+      }
+
       // Send message to player
       AdventureLocale.PRIVATE_MESSAGE_FROM.send(
               player,
