@@ -57,7 +57,9 @@ public class StaffMessenger {
     }
 
     for(Player player : Bukkit.getOnlinePlayers()) {
-      Players.msg(player, message.message);
+      if(player.hasPermission("pixellite.staff")) {
+        Players.msg(player, message.message);
+      }
     }
   }
 }
