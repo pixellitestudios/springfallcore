@@ -16,6 +16,7 @@ import studio.pixellite.core.command.redirect.HubCommand;
 import studio.pixellite.core.command.redirect.RedirectCommand;
 import studio.pixellite.core.command.redirect.SendCommand;
 import studio.pixellite.core.command.staff.AlertCommand;
+import studio.pixellite.core.command.staff.PlayerListCommand;
 import studio.pixellite.core.command.staff.StaffChatCommand;
 import studio.pixellite.core.config.key.ConfigKeys;
 import studio.pixellite.core.group.PrimaryGroupTracker;
@@ -97,6 +98,7 @@ public class CorePlugin extends NetworkPluginBootstrap {
     bindModule(new StaffChatCommand(this));
     bindModule(new HubCommand(this));
     bindModule(new SendCommand(this));
+    bindModule(new PlayerListCommand(this));
 
     // Bind redirect commands
     for(String server : getConfiguration().get(ConfigKeys.REDIRECT_COMMANDS)) {
