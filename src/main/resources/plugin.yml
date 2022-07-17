@@ -1,8 +1,8 @@
-name: PixelliteNetwork
+name: PixelliteCore
 author: Pixellite Studios
 version: 1.0.0
 description: Network management plugin
-main: studio.pixellite.network.NetworkPlugin
+main: studio.pixellite.core.CorePlugin
 api-version: 1.13
 website: https://pixellite.studio/
 depend: [helper, helper-redis]
