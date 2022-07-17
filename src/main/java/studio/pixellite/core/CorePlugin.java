@@ -45,19 +45,7 @@ public class CorePlugin extends NetworkPluginBootstrap {
     Logging.info("Loading network...");
 
     messenger = Services.load(Messenger.class);
-    instanceData = new InstanceData() {
-      @NotNull
-      @Override
-      public String getId() {
-        return getConfiguration().get(ConfigKeys.SERVER_ID);
-      }
-
-      @NotNull
-      @Override
-      public Set<String> getGroups() {
-        return new HashSet<>();
-      }
-    };
+    instanceData = new InstanceDataImpl(this);
     Services.provide(InstanceData.class, instanceData);
 
     network = Network.create(messenger, instanceData);

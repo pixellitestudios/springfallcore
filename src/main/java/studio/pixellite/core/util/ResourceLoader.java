@@ -32,25 +32,6 @@ public final class ResourceLoader {
     return resourceFile;
   }
 
-  /**
-   * Loads multiple resources by recursively calling
-   * {@link #load(CorePlugin, String)} until all resources are loaded.
-   *
-   * @param plugin the primary plugin instance
-   * @param resourceNames the names of the individual resources
-   * @return an immutable list of resource files
-   */
-  public static List<File> loadMultiple(CorePlugin plugin,
-                                        String... resourceNames) {
-    ImmutableList.Builder<File> builder = ImmutableList.builder();
-
-    for(String name : resourceNames) {
-      builder.add(load(plugin, name));
-    }
-
-    return builder.build();
-  }
-
   // Ensure that this class is not constructed
   private ResourceLoader() {}
 }
